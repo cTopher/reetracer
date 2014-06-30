@@ -13,10 +13,9 @@ class RayTracerSuite extends FunSuite with CustomMatchers {
 
   val surface = Materialized(Plane, Material(Red))
   val lights = Set(Light(White, 1, Vertex(0, 0, 4)))
-  val camera =  Camera(Vertex(0, 5, 5), Vector(0, -1, -1), Vector(0, 0, 1), math.toRadians(60))
-  val scene = Scene(camera, surface, lights)
+  val scene = Scene(null, surface, lights)
   
-  val rayTracer = new RayTracer(scene)
+  val rayTracer = new RayTracer(scene, null)
 
   test("look at the plane") {
     val color = rayTracer.traceColor(Ray(Vertex(0, 0, 4), Vector(0, 0, -1)))

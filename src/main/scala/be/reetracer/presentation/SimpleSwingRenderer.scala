@@ -9,16 +9,15 @@ import be.reetracer.domain.Color
 import java.awt.image.BufferedImage
 import be.reetracer.infrastructure.Configuration
 import scala.language.implicitConversions
-import be.reetracer.application.Renderer
 
-class SimpleSwingRenderer extends Renderer {
+class SimpleSwingRenderer {
 
   private val canvas: BufferedImage = new BufferedImage(Configuration.Width, Configuration.Height, BufferedImage.TYPE_INT_RGB);
 
   RenderingApplication.startup(null)
   new Thread(Refresher).start
 
-  override def draw(x: Int, y: Int, color: Color) = {
+  def draw(x: Int, y: Int, color: Color) = {
     canvas.setRGB(x, y, color.flat.getRGB())
   }
 

@@ -5,24 +5,26 @@ import be.reetracer.domain._
 import be.reetracer.domain.surface._
 import Double.PositiveInfinity
 import be.reetracer.infrastructure.Configuration
+import be.reetracer.application.util.Time
 
-class RayTracer(scene: Scene) {
-  
-  val screen = new Screen(Configuration.Width, Configuration.Height, scene.camera)
+class RayTracer(scene: Scene, screen: Screen) {
 
-  def traceScene(renderer: Renderer) = {
+  def traceScene(updateListener: UpdateListener) = {
     for {
       i <- (0 until screen.pixelWidth).par
-      j <- (0 until screen.pixelHeight).par
+      j <- (0 until screen.pixelHeight)
     } yield {
-      val ray = {
-        Ray(scene.camera.eye, screen.getVertex(i, j))
-      }
-      val color = traceColor(ray)
-      renderer.draw(i, j, color)
+      val (color, time) = Time.time { calculatePixel(i, j) }
+      screen.pixelColors += ((i,j) -> color)
+      updateListener.pixelCalculated((i,j), time)
     }
   }
-  
+
+  def calculatePixel(i: Int, j: Int): Color = {
+    val ray = Ray(scene.camera.eye, screen.getVertex(i, j))
+    traceColor(ray)
+  }
+
   def traceColor(ray: Ray): Color = traceColor(ray, Interval(0, PositiveInfinity), scene)
 
   def traceColor(ray: Ray, interval: Interval, scene: Scene): Color = {
@@ -50,7 +52,7 @@ class RayTracer(scene: Scene) {
 }
 
 object RayTracer {
-  
-    val Epsilon: Double = 0.01
+
+  val Epsilon: Double = 0.01
 
 }
