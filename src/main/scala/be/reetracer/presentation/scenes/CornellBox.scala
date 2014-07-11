@@ -33,12 +33,12 @@ object CornellBox {
     withTransformation(xRotation(toRadians(90))).
     withTransformation(translation(Vector(0, 10, 0))).
     withMaterial(Diffuse(WhiteSmoke))
-    val Floor = Wall.
+  val Floor = Wall.
     withTransformation(xRotation(toRadians(-90))).
     withTransformation(translation(Vector(0, 0, 10))).
     withMaterial(Diffuse(WhiteSmoke))
-    
-  val Surface = SurfaceCollection(BackWall, LeftWall, RightWall, Ceiling)
+
+  val Surface = SurfaceCollection(BackWall, LeftWall, RightWall, Ceiling, Floor)
 
   val Light = domain.Light(White, 1, Vertex(5, 9, 5))
 
