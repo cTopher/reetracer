@@ -1,7 +1,7 @@
-package be.reetracer.application.util
+package be.reetracer.util
 
-import org.scalatest.time.Nanoseconds
 import scala.concurrent.duration._
+import scala.language.postfixOps 
 
 object Time {
 

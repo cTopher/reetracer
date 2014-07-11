@@ -9,9 +9,8 @@ case object Plane extends Surface {
   override def hit(ray: Ray, interval: Interval): Option[HitRecord] = {
     if (ray.direction.z != 0) {
       val d = -ray.origin.z / ray.direction.z
-      if (interval.contains(d)) {
-        Some(HitRecord(ray, d, normal, this))
-      } else None
+      if (interval.contains(d)) Some(HitRecord(ray, d, normal, this))
+      else None
     } else None
   }
 

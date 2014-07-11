@@ -1,8 +1,12 @@
 package be.reetracer.domain
 
 import Matrix._
+import scala.math._
 
 case class Matrix(_1: Row, _2: Row, _3: Row, _4: Row) {
+
+  def *(m: Matrix): Matrix =
+    Matrix(mul(_1, m), mul(_2, m), mul(_3, m), mul(_4, m))
 
   def *(v: Vector): Vector = {
     val x = mul(_1, v)
@@ -27,6 +31,8 @@ case class Matrix(_1: Row, _2: Row, _3: Row, _4: Row) {
 
   def *(a: Double): Matrix =
     Matrix(mul(_1, a), mul(_2, a), mul(_3, a), mul(_4, a))
+
+  def column(i: Int) = (element(1, i), element(2, i), element(3, i), element(4, i))
 
   lazy val inverse: Matrix = {
     val cofactor = this.cofactor
@@ -89,6 +95,7 @@ case class Matrix(_1: Row, _2: Row, _3: Row, _4: Row) {
 object Matrix {
 
   type Row = (Double, Double, Double, Double)
+  type Column = (Double, Double, Double, Double)
 
   def translation(t: Vector) = Matrix(
     (1, 0, 0, t.x),
@@ -102,6 +109,24 @@ object Matrix {
     (0, 0, a, 0),
     (0, 0, 0, 1))
 
+  def xRotation(alpha: Double) = Matrix(
+    (1, 0, 0, 0),
+    (0, cos(alpha), -sin(alpha), 0),
+    (0, sin(alpha), cos(alpha), 0),
+    (0, 0, 0, 1))
+
+  def yRotation(beta: Double) = Matrix(
+    (cos(beta), 0, sin(beta), 0),
+    (0, 1, 0, 0),
+    (-sin(beta), 0, cos(beta), 0),
+    (0, 0, 0, 1))
+
+  def zRotation(gamma: Double) = Matrix(
+    (cos(gamma), -sin(gamma), 0, 0),
+    (sin(gamma), cos(gamma), 0, 0),
+    (0, 0, 1, 0),
+    (0, 0, 0, 1))
+
   private def determinant_3x3(matrix: Seq[Seq[Double]]): Double = {
     require(matrix.size == 3 && matrix.forall(_.size == 3))
     matrix(0)(0) * matrix(1)(1) * matrix(2)(2) +
@@ -111,6 +136,12 @@ object Matrix {
       matrix(0)(1) * matrix(1)(0) * matrix(2)(2) -
       matrix(0)(0) * matrix(1)(2) * matrix(2)(1)
   }
+
+  private def mul(row: Row, m: Matrix): Row =
+    (mul(row, m.column(1)), mul(row, m.column(2)), mul(row, m.column(3)), mul(row, m.column(4)))
+
+  private def mul(row: Row, col: Column): Double =
+    row._1 * col._1 + row._2 * col._2 + row._3 * col._3 + row._4 * col._4
 
   private def mul(row: Row, a: Double): Row =
     (row._1 * a, row._2 * a, row._3 * a, row._4 * a)

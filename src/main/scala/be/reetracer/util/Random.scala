@@ -1,4 +1,4 @@
-package be.reetracer.application
+package be.reetracer.util
 
 object Random {
 

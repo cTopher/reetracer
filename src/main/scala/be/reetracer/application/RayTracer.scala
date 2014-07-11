@@ -5,7 +5,7 @@ import be.reetracer.domain._
 import be.reetracer.domain.surface._
 import Double.PositiveInfinity
 import be.reetracer.infrastructure.Configuration
-import be.reetracer.application.util.Time
+import be.reetracer.util.Time
 
 class RayTracer(scene: Scene, screen: Screen) {
 

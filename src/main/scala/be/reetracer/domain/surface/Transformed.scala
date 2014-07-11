@@ -11,15 +11,14 @@ case class Transformed(surface: Surface, transformation: Matrix) extends Surface
     val origin = transformation.inverse * ray.origin
     val direction = transformation.inverse * ray.direction
     val norm = direction.norm
-    val hit = surface.hit(Ray(origin, direction.normalised), interval / norm)
-    hit match {
-      case Some(hit) => {
-        val transformedNormal = (transformation.inverse.transpose * hit.normal).normalised
-        val transformedD = hit.d * norm
-        Some(HitRecord(ray, transformedD, transformedNormal, hit.surface, hit.material))
-      }
-      case None => None
-    }
+    val hit = surface.hit(Ray(origin, direction.normalised), interval * norm)
+    hit.map(hit => {
+      val transformedNormal = (transformation.inverse.transpose * hit.normal).normalised
+      val transformedD = hit.d / norm
+      HitRecord(ray, transformedD, transformedNormal, hit.surface, hit.material)
+    })
   }
+  
+  override def withTransformation(newTransformation: Matrix) = Transformed(surface, newTransformation * transformation)
 
 }

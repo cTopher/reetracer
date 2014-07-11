@@ -4,10 +4,10 @@ import org.scalatest.FunSuite
 import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
 import be.reetracer.domain._
-import org.scalatest.matchers.ShouldMatchers._
+import be.reetracer.CustomMatchers
 
 @RunWith(classOf[JUnitRunner])
-class PlaneSuite extends FunSuite {
+class PlaneSuite extends FunSuite with CustomMatchers {
 
   test("hit") {
     val hit = Plane.hit(Ray(Vertex(0, 0, 4), Vector(0, 0, -1)), Interval(0, 10)).get

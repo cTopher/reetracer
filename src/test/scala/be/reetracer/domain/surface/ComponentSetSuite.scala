@@ -1,16 +1,15 @@
 package be.reetracer.domain.surface
 
-import be.reetracer.domain.surface._;
+import be.reetracer.domain.surface._
 import be.reetracer.domain._
 import be.reetracer.domain.Color._
-
 import org.scalatest.FunSuite
 import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
-import org.scalatest.matchers.ShouldMatchers._
+import be.reetracer.CustomMatchers
 
 @RunWith(classOf[JUnitRunner])
-class ComponentSetSuite extends FunSuite {
+class ComponentSetSuite extends FunSuite with CustomMatchers {
 
   val componentSet = SurfaceCollection(Sphere, Plane)
 

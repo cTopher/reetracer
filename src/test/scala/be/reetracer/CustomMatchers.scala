@@ -3,13 +3,12 @@ package be.reetracer
 import be.reetracer.domain.Color
 import be.reetracer.CustomMatchers._
 import be.reetracer.infrastructure.Triple
-import org.scalatest.matchers.ShouldMatchers._
 import org.scalatest.matchers.Matcher
-import org.scalatest.matchers.ShouldMatchers
 import org.scalatest.matchers.MatchResult
 import scala.util.Properties
+import org.scalatest.Matchers
 
-trait CustomMatchers extends ShouldMatchers {
+trait CustomMatchers extends Matchers {
 
   def approximate(expected: Triple): Matcher[Triple] =
     Matcher { (actual: Triple) =>
