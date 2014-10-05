@@ -11,7 +11,7 @@ import be.reetracer.CustomMatchers
 @RunWith(classOf[JUnitRunner])
 class ComponentSetSuite extends FunSuite with CustomMatchers {
 
-  val componentSet = SurfaceCollection(Sphere, Plane)
+  val componentSet = SurfaceCollection(Set(Sphere, Plane))
 
   test("hit the first object") {
     val hit = componentSet.hit(Ray(Vertex(0, 0, 4), Vector(0, 0, -1)), Interval(0, 10)).get

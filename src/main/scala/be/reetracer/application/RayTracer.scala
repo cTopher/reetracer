@@ -42,7 +42,7 @@ class RayTracer(scene: Scene, screen: Screen) {
   def calculateColor(hit: HitRecord, light: Light): Color = {
     val direction = light.directionFrom(hit.point)
     val shadowRay = Ray(hit.point, direction.normalised)
-    if (hits(shadowRay, Interval(Epsilon, direction.norm))) {
+    if (hits(shadowRay, Interval(RayTracer.Epsilon, direction.norm))) {
       Color.Black
     } else {
       hit.material.diffuseColor * light.realColor * math.max(0, hit.normal * direction.normalised)

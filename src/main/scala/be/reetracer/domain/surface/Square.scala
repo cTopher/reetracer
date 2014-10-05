@@ -4,8 +4,6 @@ import be.reetracer.domain._
 
 case object Square extends Surface {
 
-  private val XYInterval = Interval(0, 1)
-
   override def hit(ray: Ray, interval: Interval): Option[HitRecord] = {
     val optionalPlaneHit = Plane.hit(ray, interval)
     optionalPlaneHit.flatMap { planeHit =>
@@ -14,6 +12,6 @@ case object Square extends Surface {
     }
   }
 
-  private def isInXYInterval(hitPoint: Vertex) = XYInterval.contains(hitPoint.x) && XYInterval.contains(hitPoint.y)
+  private def isInXYInterval(hitPoint: Vertex) = Interval.Unity.contains(hitPoint.x) && Interval.Unity.contains(hitPoint.y)
 
 }

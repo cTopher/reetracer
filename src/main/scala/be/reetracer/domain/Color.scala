@@ -33,8 +33,8 @@ object Color {
   val Green = Color(0, 1, 0)
   val WhiteSmoke = Color("#F5F5F5")
   val ForestGreen = Color("#228B22")
-    val LimeGreen  = Color("#32CD32")
-
+  val LimeGreen = Color("#32CD32")
+  val Gold = Color("#FFD700")
 
   def PseudoColor(intensity: Double): Color = {
     if (intensity < 1) {
@@ -48,9 +48,9 @@ object Color {
   }
 
   def apply(hexadecimal: String): Color = {
-	assert(hexadecimal.startsWith("#"))
+    assert(hexadecimal.startsWith("#"))
     assert(hexadecimal.length == 7)
-    def parse(s:String) =  parseInt(s, 16) / 255d
+    def parse(s: String) = parseInt(s, 16) / 255d
     val r = parse(hexadecimal.substring(1, 3))
     val g = parse(hexadecimal.substring(3, 5))
     val b = parse(hexadecimal.substring(5, 7))

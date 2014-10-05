@@ -18,4 +18,6 @@ object Interval {
       Interval(a, b);
     }
   
+  val Unity = Interval(0,1)
+  
 }

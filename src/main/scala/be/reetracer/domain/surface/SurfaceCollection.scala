@@ -15,9 +15,3 @@ case class SurfaceCollection(surfaces: Set[Surface]) extends Surface {
 
 }
 
-object SurfaceCollection {
-
-  def apply(surfaces: Surface*): SurfaceCollection = SurfaceCollection(surfaces.toSet)
-
-}
-
