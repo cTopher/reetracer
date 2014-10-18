@@ -2,6 +2,7 @@
 *.log
 bin/
 .settings/
+.idea/
 
 # sbt specific
 .cache/

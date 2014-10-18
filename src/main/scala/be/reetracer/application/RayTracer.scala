@@ -45,7 +45,7 @@ class RayTracer(scene: Scene, screen: Screen) {
     if (hits(shadowRay, Interval(RayTracer.Epsilon, direction.norm))) {
       Color.Black
     } else {
-      hit.material.diffuseColor * light.realColor * math.max(0, hit.normal * direction.normalised)
+      hit.material.diffuseColor * light.realColor * math.max(0, hit.normal dotProduct direction.normalised)
     }
   }
 

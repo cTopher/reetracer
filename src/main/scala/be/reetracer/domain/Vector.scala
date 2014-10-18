@@ -10,11 +10,13 @@ sealed case class Vector(x: Double, y: Double, z: Double) extends Triple {
 
   def -(other: Vector): Vector = Vector(x - other.x, y - other.y, z - other.z)
 
-  def *(other: Vector): Double = x * other.x + y * other.y + z * other.z
+  def dotProduct(other: Vector): Double = x * other.x + y * other.y + z * other.z
 
   def *(a: Double): Vector = Vector(x * a, y * a, z * a)
 
   def /(a: Double): Vector = Vector(x / a, y / a, z / a)
+
+//  def * (other:Vector) = Vector(x * other.x, y * other.y, z * other.z)
 
   def crossProduct(other: Vector): Vector = Vector(y * other.z - z * other.y, z * other.x - x * other.z, x * other.y - y * other.x);
 
